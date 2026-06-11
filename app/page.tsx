@@ -14,10 +14,10 @@ const ABI = [
 ];
 
 const phases = [
-  { phase: 1, start: 1, end: 25, minted: 0, status: 'live', name: "The First Rite", unlockNote: "" },
-  { phase: 2, start: 26, end: 50, minted: 0, status: 'locked', name: "The Forgotten Sigil", unlockNote: "Unlocks 24h after Phase 1 is fully minted" },
-  { phase: 3, start: 51, end: 75, minted: 0, status: 'locked', name: "The Eternal Flame", unlockNote: "Unlocks 24h after Phase 2 is fully minted" },
-  { phase: 4, start: 76, end: 100, minted: 0, status: 'locked', name: "The Final Offering", unlockNote: "Unlocks 24h after Phase 3 is fully minted" },
+  { phase: 1, start: 1, end: 25, minted: 0, status: 'live', name: "The First Rite", unlockNote: "", image: "/nfts/phase1.png" },
+  { phase: 2, start: 26, end: 50, minted: 0, status: 'locked', name: "The Forgotten Sigil", unlockNote: "Unlocks 24h after Phase 1 is fully minted", image: "/nfts/phase2.png" },
+  { phase: 3, start: 51, end: 75, minted: 0, status: 'locked', name: "The Eternal Flame", unlockNote: "Unlocks 24h after Phase 2 is fully minted", image: "/nfts/phase3.png" },
+  { phase: 4, start: 76, end: 100, minted: 0, status: 'locked', name: "The Final Offering", unlockNote: "Unlocks 24h after Phase 3 is fully minted", image: "/nfts/phase4.png" },
 ];
 
 export default function RitualFudder() {
@@ -169,6 +169,11 @@ export default function RitualFudder() {
               {phases.map((p, index) => (
                 <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl p-9">
                   
+                  {p.image && (
+                    <div className="mb-6 rounded-2xl overflow-hidden border border-white/10">
+                      <img src={p.image} alt={p.name} className="w-full aspect-square object-cover" />
+                    </div>
+                  )}
                   <div className="text-4xl tracking-[-1.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
                   <div className="text-2xl text-[#C5A26F] font-medium mb-2">{p.name}</div>
                   
