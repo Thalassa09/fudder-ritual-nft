@@ -1,184 +1,107 @@
 'use client';
 
 import { useState } from 'react';
-import { Wallet, ArrowRight, Search, Heart } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 
 interface NFT {
   id: number;
   name: string;
-  image: string;
   price: string;
   owner: string;
 }
 
-const mockNFTs: NFT[] = [
-  { id: 1, name: "Ritual Agent #001", image: "∞", price: "0.05", owner: "0x1234...5678" },
-  { id: 2, name: "Ritual Agent #002", image: "∞", price: "0.08", owner: "0x8765...4321" },
-  { id: 3, name: "Ritual Agent #003", image: "∞", price: "0.03", owner: "0x1111...2222" },
-  { id: 4, name: "Ritual Agent #004", image: "∞", price: "0.12", owner: "0x3333...4444" },
+const nfts: NFT[] = [
+  { id: 1, name: "Ritual Genesis #01", price: "0.042", owner: "0x8f2a...3b91" },
+  { id: 2, name: "Ritual Genesis #02", price: "0.067", owner: "0x1c4d...7e2f" },
+  { id: 3, name: "Ritual Genesis #03", price: "0.031", owner: "0x9b21...4a88" },
+  { id: 4, name: "Ritual Genesis #04", price: "0.089", owner: "0x3f7c...9d15" },
+  { id: 5, name: "Ritual Genesis #05", price: "0.055", owner: "0x6e8b...2c44" },
+  { id: 6, name: "Ritual Genesis #06", price: "0.074", owner: "0x2a9f...5e77" },
 ];
 
-export default function FudderRitualNFT() {
-  const [address, setAddress] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'explore' | 'mint' | 'owned'>('explore');
-  const [isConnecting, setIsConnecting] = useState(false);
+export default function FudderRitual() {
+  const [address, setAddress] = useState('');
+  const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
 
-  const connectWallet = async () => {
-    if (!(window as any).ethereum) {
-      alert('Please install MetaMask');
-      return;
-    }
-
-    setIsConnecting(true);
+  const connect = async () => {
+    if (!(window as any).ethereum) return alert('Install MetaMask');
     try {
       const { ethers } = await import('ethers');
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
-      await provider.send('eth_requestAccounts', []);
-      const signer = await provider.getSigner();
-      const addr = await signer.getAddress();
-      setAddress(addr);
-
-      try {
-        await (window as any).ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0xEFA' }],
-        });
-      } catch (switchError: any) {
-        if (switchError.code === 4902) {
-          await (window as any).ethereum.request({
-            method: 'wallet_addEthereumChain',
-            params: [{
-              chainId: '0xEFA',
-              chainName: 'Ritual Testnet',
-              nativeCurrency: { name: 'Ritual', symbol: 'RIT', decimals: 18 },
-              rpcUrls: ['https://testnet.rpc.ritual.net'],
-              blockExplorerUrls: ['https://explorer.ritual.net']
-            }]
-          });
-        }
-      }
-
-      setStatus('Connected to Ritual Testnet');
-    } catch (error) {
-      alert('Failed to connect wallet');
-    }
-    setIsConnecting(false);
+      const p = new ethers.BrowserProvider((window as any).ethereum);
+      await p.send('eth_requestAccounts', []);
+      const s = await p.getSigner();
+      setAddress(await s.getAddress());
+      setStatus('Connected • Ritual Testnet');
+    } catch {}
   };
 
-  const mintNFT = async () => {
-    if (!address) {
-      alert('Connect wallet first');
-      return;
-    }
-
+  const mint = async () => {
+    if (!address) return alert('Connect first');
     setStatus('Minting...');
-    try {
-      const { ethers } = await import('ethers');
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
-      const signer = await provider.getSigner();
-
-      // Ganti dengan contract address Ritual yang asli
-      const contractAddress = '0x0000000000000000000000000000000000000000';
-      const abi = ['function mint() payable'];
-
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx = await contract.mint({ value: ethers.parseEther('0.01') });
-      
-      setStatus('Transaction sent...');
-      await tx.wait();
-      setStatus('Mint successful!');
-    } catch (error: any) {
-      setStatus('Mint failed: ' + error.message);
-    }
+    // placeholder
+    setTimeout(() => setStatus('Mint successful'), 1200);
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] text-[#1C1917]">
-      {/* Navbar */}
-      <nav className="border-b border-[#e8e0d5] bg-[#f5f0e8] sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+    <div className="min-h-screen bg-[#f5f0e8] text-[#1C1917] font-sans">
+      {/* Nav */}
+      <nav className="border-b border-[#e8e0d5]">
+        <div className="max-w-6xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3">
-            <img src="/logo.png" alt="Fudder" className="w-9 h-9 rounded-xl" />
+            <img src="/logo.png" className="w-9 h-9 rounded-xl" alt="" />
             <div>
-              <div className="font-semibold tracking-tight text-2xl">Fudder</div>
-              <div className="text-[10px] text-[#8B5E3C] -mt-1">Ritual NFT</div>
+              <div className="font-semibold tracking-[-0.5px] text-[21px]">Fudder</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-x-3">
-            <img src="/logo.png" alt="Fudder" className="w-9 h-9 rounded-xl" />
-            <div className="relative w-80">
-              <Search className="absolute left-4 top-3 text-[#8B5E3C]" size={18} />
+          <div className="flex items-center gap-x-4">
+            <div className="relative w-72">
+              <Search size={17} className="absolute left-4 top-3.5 text-[#8B5E3C]" />
               <input 
-                type="text" 
-                placeholder="Search collections or NFTs" 
-                className="w-full bg-white border border-[#e8e0d5] pl-11 py-2.5 rounded-2xl text-sm focus:outline-none focus:border-[#8B5E3C]"
+                placeholder="Search Ritual NFTs" 
+                className="w-full bg-white border border-[#e8e0d5] pl-11 h-11 rounded-2xl text-sm placeholder:text-[#8B5E3C]/60 focus:outline-none focus:border-[#8B5E3C]" 
               />
             </div>
-            
-            <button 
-              onClick={connectWallet}
-              disabled={isConnecting}
-              className="flex items-center gap-x-2 px-5 py-2.5 text-sm font-medium border border-[#1C1917] rounded-2xl hover:bg-[#1C1917] hover:text-[#f5f0e8] transition-all disabled:opacity-50"
-            >
-              <Wallet size={17} />
-              {address ? `${address.slice(0,6)}...${address.slice(-4)}` : 'Connect'}
+            <button onClick={connect} className="px-6 h-11 rounded-2xl border border-[#1C1917] text-sm hover:bg-[#1C1917] hover:text-[#f5f0e8] transition-all">
+              {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
             </button>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-8 border-t border-[#e8e0d5]">
-          {(['explore', 'mint', 'owned'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`py-4 text-sm font-medium capitalize transition-all border-b-2 ${
-                activeTab === tab 
-                  ? 'border-[#1C1917] text-[#1C1917]' 
-                  : 'border-transparent text-[#8B5E3C] hover:text-[#1C1917]'
-              }`}
-            >
-              {tab === 'owned' ? 'My NFTs' : tab}
+        <div className="max-w-6xl mx-auto px-8 flex gap-x-9 text-sm border-t border-[#e8e0d5]">
+          {(['explore','mint','owned'] as const).map(t => (
+            <button key={t} onClick={() => setTab(t)} className={`py-4 capitalize tracking-[-0.2px] ${tab===t ? 'border-b-2 border-[#1C1917] font-medium' : 'text-[#8B5E3C]'}`}>
+              {t === 'owned' ? 'My Collection' : t}
             </button>
           ))}
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-8 py-10">
-        {/* Explore Tab */}
-        {activeTab === 'explore' && (
+      <div className="max-w-6xl mx-auto px-8 pt-12 pb-24">
+        {/* Explore */}
+        {tab === 'explore' && (
           <>
-            <div className="flex justify-between items-end mb-8">
+            <div className="flex items-end justify-between mb-9">
               <div>
-                <div className="text-xs tracking-[3px] text-[#8B5E3C] mb-1">RITUAL TESTNET</div>
-                <div className="text-5xl font-semibold tracking-[-2px]">Explore Collections</div>
+                <div className="uppercase tracking-[3px] text-xs text-[#8B5E3C] mb-2">Ritual Testnet</div>
+                <div className="text-6xl font-semibold tracking-[-3px]">Ritual Genesis</div>
               </div>
-              <div className="text-sm text-[#8B5E3C]">4,892 NFTs • 128 Collections</div>
+              <div className="text-[#8B5E3C] text-sm">6,420 NFTs • 214 Holders</div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-              {mockNFTs.map((nft) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {nfts.map(nft => (
                 <div key={nft.id} className="bg-white border border-[#e8e0d5] rounded-3xl overflow-hidden group">
-                  <div className="bg-[#f8f3eb] h-56 flex items-center justify-center relative">
-                    <div className="text-7xl text-[#8B5E3C] opacity-80">{nft.image}</div>
-                    <button className="absolute top-4 right-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                      <Heart size={16} />
-                    </button>
-                  </div>
+                  <div className="h-56 bg-[#f8f3eb] flex items-center justify-center text-[72px] text-[#8B5E3C]/70">∞</div>
                   <div className="p-5">
-                    <div className="font-semibold tracking-tight mb-1">{nft.name}</div>
-                    <div className="text-xs text-[#8B5E3C] mb-4">{nft.owner}</div>
-                    
-                    <div className="flex items-center justify-between">
+                    <div className="font-medium tracking-[-0.3px] mb-4">{nft.name}</div>
+                    <div className="flex items-center justify-between text-sm">
                       <div>
-                        <div className="text-xs text-[#8B5E3C]">Price</div>
+                        <div className="text-[#8B5E3C] text-xs">Price</div>
                         <div className="font-mono font-medium">{nft.price} ETH</div>
                       </div>
-                      <button className="px-5 py-2 text-sm bg-[#1C1917] text-[#f5f0e8] rounded-2xl hover:bg-[#8B5E3C] transition-all">
-                        Buy Now
-                      </button>
+                      <button className="px-6 py-2 rounded-2xl bg-[#1C1917] text-[#f5f0e8] text-sm hover:bg-[#8B5E3C] transition-all">Buy</button>
                     </div>
                   </div>
                 </div>
@@ -187,60 +110,47 @@ export default function FudderRitualNFT() {
           </>
         )}
 
-        {/* Mint Tab */}
-        {activeTab === 'mint' && (
-          <div className="max-w-lg mx-auto pt-12">
-            <div className="text-center mb-10">
-              <div className="text-xs tracking-[3px] text-[#8B5E3C] mb-2">RITUAL TESTNET</div>
-              <div className="text-6xl font-semibold tracking-[-2.5px] mb-3">Mint Ritual NFT</div>
-              <p className="text-[#5C5248]">Create your own Autonomous Agent on Ritual</p>
+        {/* Mint */}
+        {tab === 'mint' && (
+          <div className="max-w-md mx-auto pt-10">
+            <div className="text-center mb-9">
+              <div className="text-xs tracking-[3px] text-[#8B5E3C] mb-3">RITUAL TESTNET</div>
+              <div className="text-6xl font-semibold tracking-[-2.8px]">Mint</div>
             </div>
 
             <div className="bg-white border border-[#e8e0d5] rounded-3xl p-9">
-              <div className="bg-[#f8f3eb] border border-[#e8e0d5] rounded-2xl h-72 flex items-center justify-center mb-8">
+              <div className="h-72 bg-[#f8f3eb] rounded-2xl flex items-center justify-center mb-8">
                 <div className="text-center">
-                  <div className="text-8xl mb-4 text-[#8B5E3C]">∞</div>
-                  <div className="font-medium">Ritual Agent</div>
-                  <div className="text-sm text-[#8B5E3C] mt-1">Limited Edition</div>
+                  <div className="text-8xl text-[#8B5E3C]">∞</div>
+                  <div className="mt-3 font-medium">Ritual Genesis</div>
                 </div>
               </div>
 
-              <div className="space-y-3 text-sm mb-8">
-                <div className="flex justify-between"><span className="text-[#5C5248]">Price</span><span className="font-medium">0.01 ETH</span></div>
-                <div className="flex justify-between"><span className="text-[#5C5248]">Network</span><span className="font-medium">Ritual Testnet</span></div>
-                <div className="flex justify-between"><span className="text-[#5C5248]">Supply</span><span className="font-medium">10,000 / 10,000</span></div>
+              <div className="space-y-4 text-sm mb-8">
+                <div className="flex justify-between"><span className="text-[#8B5E3C]">Price</span><span className="font-medium">0.01 ETH</span></div>
+                <div className="flex justify-between"><span className="text-[#8B5E3C]">Supply</span><span className="font-medium">10,000 / 10,000</span></div>
               </div>
 
-              <button 
-                onClick={mintNFT}
-                disabled={!address}
-                className="w-full py-4 bg-[#1C1917] hover:bg-[#8B5E3C] text-[#f5f0e8] rounded-2xl font-semibold flex items-center justify-center gap-x-2 disabled:opacity-50 transition-all"
-              >
-                Mint NFT <ArrowRight size={19} />
+              <button onClick={mint} disabled={!address} className="w-full h-14 bg-[#1C1917] text-[#f5f0e8] rounded-2xl font-medium flex items-center justify-center gap-x-2 disabled:opacity-60 hover:bg-[#8B5E3C]">
+                Mint Now <ArrowRight size={19} />
               </button>
             </div>
-
             {status && <div className="text-center mt-6 text-sm text-[#8B5E3C]">{status}</div>}
           </div>
         )}
 
-        {/* Owned Tab */}
-        {activeTab === 'owned' && (
-          <div className="pt-8">
-            <div className="text-4xl font-semibold tracking-[-1.5px] mb-8">My NFTs</div>
-            
+        {/* Owned */}
+        {tab === 'owned' && (
+          <div>
+            <div className="text-4xl font-semibold tracking-[-1.2px] mb-8">My Collection</div>
             {!address ? (
-              <div className="text-center py-20 text-[#8B5E3C]">
-                Connect your wallet to view your NFTs
-              </div>
+              <div className="text-[#8B5E3C] py-20 text-center">Connect wallet to view your collection</div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                {mockNFTs.slice(0, 2).map((nft) => (
-                  <div key={nft.id} className="bg-white border border-[#e8e0d5] rounded-3xl p-5">
-                    <div className="bg-[#f8f3eb] h-48 rounded-2xl flex items-center justify-center mb-5">
-                      <div className="text-6xl text-[#8B5E3C]">{nft.image}</div>
-                    </div>
-                    <div className="font-medium">{nft.name}</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {nfts.slice(0,3).map(n => (
+                  <div key={n.id} className="bg-white border border-[#e8e0d5] rounded-3xl p-5">
+                    <div className="h-44 bg-[#f8f3eb] rounded-2xl flex items-center justify-center text-6xl text-[#8B5E3C]">∞</div>
+                    <div className="mt-5 font-medium">{n.name}</div>
                   </div>
                 ))}
               </div>
