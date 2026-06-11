@@ -49,7 +49,7 @@ export default function FudderRitual() {
         <div className="max-w-6xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3">
             <img src="/logo.png" className="w-9 h-9 rounded-xl" alt="" />
-            <div className="font-semibold tracking-[-0.5px] text-[21px]">Fudder</div>
+            <div className="font-semibold tracking-[-0.5px] text-[21px]">Fudder NFT</div>
           </div>
 
           <div className="flex items-center gap-x-4">
