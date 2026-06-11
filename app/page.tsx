@@ -70,11 +70,10 @@ export default function RitualFudder() {
       const iface = new ethers.Interface(ABI);
       const data = iface.encodeFunctionData("mint");
       
-      // Send legacy transaction (type 0)
+      // Send transaction without specifying value
       const tx = await signer.sendTransaction({
         to: CONTRACT_ADDRESS,
-        data: data,
-        value: 0
+        data: data
       });
       await tx.wait();
       
