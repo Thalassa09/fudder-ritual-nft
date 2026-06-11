@@ -73,11 +73,7 @@ export default function RitualFudder() {
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3.5">
             <div className="w-9 h-9 rounded-2xl bg-[#0A0A09] flex items-center justify-center border border-white/20 overflow-hidden">
-              <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 8 L75 25 L75 75 L50 92 L25 75 L25 25 Z" fill="#0A0A09" stroke="white" strokeWidth="7"/>
-                <path d="M35 30 L65 70 M65 30 L35 70" stroke="white" strokeWidth="5"/>
-                <circle cx="50" cy="50" r="8" fill="white"/>
-              </svg>
+              <img src="/logo.png" className="w-6 h-6" alt="Ritual Fudder" />
             </div>
             <div>
               <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
