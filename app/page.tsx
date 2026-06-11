@@ -14,38 +14,10 @@ const ABI = [
 ];
 
 const phases = [
-  { 
-    phase: 1, 
-    start: 1, 
-    end: 25, 
-    minted: 0, 
-    status: 'live',
-    name: "The First Rite"
-  },
-  { 
-    phase: 2, 
-    start: 26, 
-    end: 50, 
-    minted: 0, 
-    status: 'upcoming',
-    name: "The Forgotten Sigil"
-  },
-  { 
-    phase: 3, 
-    start: 51, 
-    end: 75, 
-    minted: 0, 
-    status: 'upcoming',
-    name: "The Eternal Flame"
-  },
-  { 
-    phase: 4, 
-    start: 76, 
-    end: 100, 
-    minted: 0, 
-    status: 'upcoming',
-    name: "The Final Offering"
-  },
+  { phase: 1, start: 1, end: 25, minted: 0, status: 'live', name: "The First Rite" },
+  { phase: 2, start: 26, end: 50, minted: 0, status: 'upcoming', name: "The Forgotten Sigil" },
+  { phase: 3, start: 51, end: 75, minted: 0, status: 'upcoming', name: "The Eternal Flame" },
+  { phase: 4, start: 76, end: 100, minted: 0, status: 'upcoming', name: "The Final Offering" },
 ];
 
 export default function RitualFudder() {
@@ -96,14 +68,16 @@ export default function RitualFudder() {
 
   return (
     <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
-      {/* Nav */}
+      {/* Nav - Premium Style */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-x-4">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center">
-              <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-2px]">R</span>
+          <div className="flex items-center gap-x-3.5">
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
+              <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-2.2px]">R</span>
             </div>
-            <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
+            <div>
+              <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
+            </div>
           </div>
 
           <button
@@ -115,15 +89,18 @@ export default function RitualFudder() {
           </button>
         </div>
 
-        {/* Tabs */}
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-2 text-sm border-t border-white/10 pt-1">
+        {/* Tabs - Subtle Style */}
+        <div className="max-w-7xl mx-auto px-8 flex gap-x-1 text-sm border-t border-white/10">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-6 py-3 capitalize tracking-[-0.3px] rounded-xl transition-all font-medium ${tab === t ? 'bg-white text-[#0A0A09]' : 'text-white/60 hover:text-white/90 hover:bg-white/5'}`}
+              className={`px-5 py-[17px] capitalize tracking-[-0.3px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/80'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
+              {tab === t && (
+                <div className="absolute bottom-0 left-5 right-5 h-px bg-white" />
+              )}
             </button>
           ))}
         </div>
