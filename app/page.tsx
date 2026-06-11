@@ -104,7 +104,7 @@ export default function FudderRitualNFT() {
             </div>
             <div>
               <div className="font-semibold tracking-tight text-2xl">Fudder</div>
-              <div className="text-[10px] text-[#8B5E3C] -mt-1">Ritual Testnet</div>
+              <div className="text-[10px] text-[#8B5E3C] -mt-1">Ritual NFT</div>
             </div>
           </div>
 
