@@ -110,7 +110,7 @@ export default function RitualFudder() {
           <h1 className="text-[76px] leading-[0.98] font-semibold tracking-[-6.2px] mb-5">
             Genesis.<br />On-chain.<br />Forever.
           </h1>
-          <p className="text-[17px] text-white/65 tracking-[-0.35px]">100 pieces. Only gas. No price.</p>
+          <p className="text-[17px] text-white/65 tracking-[-0.35px]">Each phase reveals after 25 NFTs minted.</p>
         </div>
       </div>
 
