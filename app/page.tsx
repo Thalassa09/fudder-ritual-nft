@@ -87,11 +87,11 @@ export default function RitualFudder() {
           </div>
 
           <div className="flex items-center gap-x-4">
-            {/* Network Status - New Design */}
+            {/* Network Status - Glassmorphism */}
             {address && (
-              <div className={`px-4 h-9 rounded-full border flex items-center gap-x-2 text-xs font-medium ${isOnRitual ? 'border-[#22C55E] bg-[#22C55E]/10 text-[#22C55E]' : 'border-red-500/50 bg-red-500/10 text-red-400'}`}>
-                <div className={`w-1.5 h-1.5 rounded-full ${isOnRitual ? 'bg-[#22C55E]' : 'bg-red-400'}`} />
-                {isOnRitual ? 'Ritual Chain' : 'Wrong Network'}
+              <div className="px-4 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl flex items-center gap-x-2 text-xs font-medium text-white/80">
+                <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
+                Ritual Chain
               </div>
             )}
 
