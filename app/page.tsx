@@ -239,7 +239,22 @@ export default function RitualFudder() {
         )}
 
         {tab === 'owned' && (
-          <div className="pt-24 text-center text-white/50">Connect wallet to see your collection.</div>
+          <div>
+            {!address ? (
+              <div className="pt-24 text-center text-white/50">Connect wallet to see your collection.</div>
+            ) : (
+              <div className="pt-12">
+                <div className="text-center mb-12">
+                  <div className="text-6xl tracking-[-2px] font-semibold mb-3">Your Collection</div>
+                  <p className="text-white/60">NFTs you own will appear here</p>
+                </div>
+                <div className="text-center py-20 border border-white/10 rounded-3xl">
+                  <div className="text-white/40">No NFTs found yet</div>
+                  <div className="text-sm text-white/30 mt-2">Start minting from the Mint tab</div>
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
