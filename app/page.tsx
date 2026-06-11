@@ -99,6 +99,7 @@ export default function FudderRitualNFT() {
       <nav className="border-b border-[#e8e0d5] bg-[#f5f0e8] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-x-3">
+            <img src="/logo.png" alt="Fudder" className="w-9 h-9 rounded-xl" />
             <div>
               <div className="font-semibold tracking-tight text-2xl">Fudder</div>
               <div className="text-[10px] text-[#8B5E3C] -mt-1">Ritual NFT</div>
@@ -106,6 +107,7 @@ export default function FudderRitualNFT() {
           </div>
 
           <div className="flex items-center gap-x-3">
+            <img src="/logo.png" alt="Fudder" className="w-9 h-9 rounded-xl" />
             <div className="relative w-80">
               <Search className="absolute left-4 top-3 text-[#8B5E3C]" size={18} />
               <input 
