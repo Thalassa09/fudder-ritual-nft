@@ -21,6 +21,7 @@ const initialNFTs: NFT[] = [
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
 const CONTRACT_ADDRESS = "0xf5CBc369f8f253D6ADD6C17D15fc5483fa8708A3";
+const RITUAL_CHAIN_ID = 1979;
 
 const ABI = [
   "function mint() payable",
@@ -48,14 +49,21 @@ export default function RitualFudder() {
 
   const mint = async () => {
     if (!address) return;
-    
+
     try {
-      setStatus('Minting on Ritual Network...');
-      
       const { ethers } = await import('ethers');
       const provider = new ethers.BrowserProvider((window as any).ethereum);
-      const signer = await provider.getSigner();
+      const network = await provider.getNetwork();
+
+      if (Number(network.chainId) !== RITUAL_CHAIN_ID) {
+        setStatus('Please switch to Ritual Network (Chain ID 1979)');
+        setTimeout(() => setStatus(''), 3000);
+        return;
+      }
+
+      setStatus('Minting on Ritual Network...');
       
+      const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
       
       const tx = await contract.mint({ value: 0 });
