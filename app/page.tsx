@@ -68,37 +68,36 @@ export default function RitualFudder() {
 
   return (
     <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
-      {/* Nav */}
+      {/* Nav - Major Redesign */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-x-3.5">
-            <div className="w-9 h-9 rounded-2xl bg-[#0A0A09] flex items-center justify-center border border-white/20 overflow-hidden">
-              <img src="/logo.png" className="w-6 h-6" alt="Ritual Fudder" />
+          <div className="flex items-center gap-x-4">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
+              <span className="text-[#0A0A09] font-bold text-[24px] tracking-[-2.5px]">R</span>
             </div>
             <div>
-              <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
+              <div className="font-semibold text-[22px] tracking-[-1.6px]">Ritual Fudder</div>
             </div>
           </div>
 
           <button
             onClick={connect}
-            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
+            className="flex items-center gap-x-2.5 px-8 h-12 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
           >
-            <Wallet size={17} />
+            <Wallet size={18} />
             {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
           </button>
         </div>
 
-        {/* Tabs */}
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-1 text-sm border-t border-white/10">
+        {/* Tabs - Major Redesign */}
+        <div className="max-w-7xl mx-auto px-8 flex gap-x-2 text-sm border-t border-white/10 bg-[#0A0A09]">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-5 py-[17px] capitalize tracking-[-0.3px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/80'}`}
+              className={`px-8 py-[18px] capitalize tracking-[-0.4px] transition-all font-medium rounded-t-xl ${tab === t ? 'text-white bg-[#11110F] border-x border-t border-white/10' : 'text-white/50 hover:text-white/90'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
-              {tab === t && <div className="absolute bottom-0 left-5 right-5 h-px bg-white" />}
             </button>
           ))}
         </div>
