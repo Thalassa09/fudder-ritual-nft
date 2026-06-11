@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Wallet, Zap } from 'lucide-react';
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
@@ -22,11 +22,8 @@ const phases = [
 
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
-  const [chainId, setChainId] = useState<number | null>(null);
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
-
-  const isOnRitual = chainId === RITUAL_CHAIN_ID;
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -36,20 +33,8 @@ export default function RitualFudder() {
       await p.send('eth_requestAccounts', []);
       const s = await p.getSigner();
       setAddress(await s.getAddress());
-      
-      const network = await p.getNetwork();
-      setChainId(Number(network.chainId));
     } catch {}
   };
-
-  // Listen to network changes
-  useEffect(() => {
-    if ((window as any).ethereum) {
-      (window as any).ethereum.on('chainChanged', (chain: string) => {
-        setChainId(parseInt(chain, 16));
-      });
-    }
-  }, []);
 
   const mint = async () => {
     if (!address) return;
@@ -88,9 +73,10 @@ export default function RitualFudder() {
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3.5">
             <div className="w-9 h-9 rounded-2xl bg-[#0A0A09] flex items-center justify-center border border-white/20 overflow-hidden">
-              <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 10 L70 30 L70 70 L50 90 L30 70 L30 30 Z" fill="#0A0A09" stroke="white" strokeWidth="8"/>
-                <path d="M35 35 L65 65 M65 35 L35 65" stroke="white" strokeWidth="6"/>
+              <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 8 L75 25 L75 75 L50 92 L25 75 L25 25 Z" fill="#0A0A09" stroke="white" strokeWidth="7"/>
+                <path d="M35 30 L65 70 M65 30 L35 70" stroke="white" strokeWidth="5"/>
+                <circle cx="50" cy="50" r="8" fill="white"/>
               </svg>
             </div>
             <div>
@@ -98,22 +84,13 @@ export default function RitualFudder() {
             </div>
           </div>
 
-          <div className="flex items-center gap-x-4">
-            {/* Network Status */}
-            {address && (
-              <div className={`px-4 h-9 rounded-xl border flex items-center text-xs font-medium ${isOnRitual ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-red-500/50 text-red-400'}`}>
-                {isOnRitual ? 'Ritual Network' : 'Wrong Network'}
-              </div>
-            )}
-
-            <button
-              onClick={connect}
-              className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
-            >
-              <Wallet size={17} />
-              {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
-            </button>
-          </div>
+          <button
+            onClick={connect}
+            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
+          >
+            <Wallet size={17} />
+            {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
+          </button>
         </div>
 
         {/* Tabs */}
