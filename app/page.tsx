@@ -74,8 +74,7 @@ export default function RitualFudder() {
       const tx = await signer.sendTransaction({
         to: CONTRACT_ADDRESS,
         data: data,
-        value: 0,
-        type: 0
+        value: 0
       });
       await tx.wait();
       
