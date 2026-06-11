@@ -91,8 +91,8 @@ export default function RitualFudder() {
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3.5">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
-              <span className="text-[#0A0A09] font-bold text-[24px] tracking-[-2.5px]">R</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/20">
+              <img src="/logo.png" alt="Ritual Fudder" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="font-sans font-semibold text-[22px] tracking-[6px] uppercase">Ritual Fudder NFT</div>
