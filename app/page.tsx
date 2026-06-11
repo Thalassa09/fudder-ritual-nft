@@ -67,20 +67,20 @@ export default function RitualFudder() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0A0F] text-[#F5F0E6]">
+    <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6]">
       {/* Nav */}
-      <nav className="border-b border-white/10 bg-[#0B0A0F]/95 backdrop-blur-3xl sticky top-0 z-50">
+      <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-4">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#A78BFA] via-[#7C3AED] to-[#5B21B6] flex items-center justify-center">
-              <span className="text-[#0B0A0F] font-bold text-[22px] tracking-[-2px]">R</span>
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center">
+              <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-2px]">R</span>
             </div>
             <div className="font-semibold text-[21px] tracking-[-1.8px]">Ritual Fudder</div>
           </div>
 
           <button
             onClick={connect}
-            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0B0A0F] active:scale-[0.985] transition-all text-sm font-medium"
+            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
           >
             <Wallet size={17} />
             {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
@@ -130,7 +130,7 @@ export default function RitualFudder() {
         )}
 
         {tab === 'mint' && (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <div className="inline-block px-6 py-2 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-8 border border-white/10">
                 4 PHASES • 25 NFT EACH
@@ -139,47 +139,50 @@ export default function RitualFudder() {
               <p className="text-2xl text-white/60 tracking-[-0.5px]">Each phase reveals only after 25 NFTs are minted.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-6">
               {phases.map((p, index) => {
                 const isRevealed = p.minted === 25;
                 return (
-                  <div key={index} className={`bg-[#12111A] border rounded-3xl p-10 transition-all ${p.status === 'live' ? 'border-[#A78BFA]/60' : 'border-white/10'}`}>
-                    <div className="flex justify-between items-start mb-9">
-                      <div>
+                  <div key={index} className={`flex flex-col md:flex-row items-center justify-between gap-8 bg-[#11110F] border rounded-3xl px-10 py-9 transition-all ${p.status === 'live' ? 'border-[#C5A26F]/50' : 'border-white/10'}`}>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-x-4 mb-4">
                         <div className="text-xs tracking-[4px] text-white/50">PHASE {p.phase}</div>
-                        <div className="text-[56px] tracking-[-3px] font-semibold mt-3">#{p.start} — #{p.end}</div>
+                        <div className={`text-xs px-4 py-1 rounded-full border ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
+                          {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
+                        </div>
                       </div>
-                      <div className={`text-xs px-5 py-2 rounded-full border font-medium ${p.status === 'live' ? 'border-[#A78BFA] text-[#A78BFA]' : 'border-white/20 text-white/50'}`}>
-                        {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
+                      <div className="text-6xl tracking-[-2.5px] font-semibold">#{p.start} — #{p.end}</div>
+                    </div>
+
+                    <div className="flex-1 w-full md:w-auto">
+                      <div className="mb-4">
+                        <div className="flex justify-between text-sm mb-2">
+                          <span className="text-white/60">Minted</span>
+                          <span className="font-mono">{p.minted} / 25</span>
+                        </div>
+                        <div className="h-px bg-white/10 rounded-full overflow-hidden">
+                          <div className="h-px bg-[#C5A26F] transition-all" style={{width: `${(p.minted/25)*100}%`}} />
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-white/60">Reveal Status</span>
+                        <span className={isRevealed ? 'text-[#C5A26F]' : 'text-white/50'}>
+                          {isRevealed ? 'Revealed' : 'Not Revealed'}
+                        </span>
                       </div>
                     </div>
 
-                    <div className="mb-9">
-                      <div className="flex justify-between text-sm mb-3">
-                        <span className="text-white/60">Minted</span>
-                        <span className="font-mono">{p.minted} / 25</span>
-                      </div>
-                      <div className="h-px bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-px bg-[#A78BFA] transition-all" style={{width: `${(p.minted/25)*100}%`}} />
-                      </div>
+                    <div className="w-full md:w-auto">
+                      {p.status === 'live' && (
+                        <button 
+                          onClick={mint}
+                          disabled={!address}
+                          className="w-full md:w-auto px-10 h-14 rounded-2xl bg-white text-[#0A0A09] font-medium flex items-center justify-center gap-x-3 hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
+                        >
+                          <Zap size={18} /> Mint Phase {p.phase}
+                        </button>
+                      )}
                     </div>
-
-                    <div className="flex justify-between items-center text-sm mb-9">
-                      <span className="text-white/60">Reveal Status</span>
-                      <span className={isRevealed ? 'text-[#A78BFA]' : 'text-white/50'}>
-                        {isRevealed ? 'Revealed' : 'Not Revealed'}
-                      </span>
-                    </div>
-
-                    {p.status === 'live' && (
-                      <button 
-                        onClick={mint}
-                        disabled={!address}
-                        className="w-full h-14 rounded-2xl bg-white text-[#0B0A0F] font-medium flex items-center justify-center gap-x-3 hover:bg-[#A78BFA] active:scale-[0.985] disabled:opacity-40 transition-all"
-                      >
-                        <Zap size={18} /> Mint Phase {p.phase}
-                      </button>
-                    )}
                   </div>
                 );
               })}
