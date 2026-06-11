@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Wallet, Zap } from 'lucide-react';
+import { Wallet, Zap, LogOut } from 'lucide-react';
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
 const CONTRACT_ADDRESS = "0xf5CBc369f8f253D6ADD6C17D15fc5483fa8708A3";
@@ -22,11 +22,8 @@ const phases = [
 
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
-  const [chainId, setChainId] = useState<number | null>(null);
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
-
-  const isOnRitual = chainId === RITUAL_CHAIN_ID;
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -36,10 +33,11 @@ export default function RitualFudder() {
       await p.send('eth_requestAccounts', []);
       const s = await p.getSigner();
       setAddress(await s.getAddress());
-      
-      const network = await p.getNetwork();
-      setChainId(Number(network.chainId));
     } catch {}
+  };
+
+  const disconnect = () => {
+    setAddress('');
   };
 
   const mint = async () => {
@@ -86,12 +84,17 @@ export default function RitualFudder() {
             </div>
           </div>
 
-          <div className="flex items-center gap-x-4">
-            {/* Network Status - Always Visible */}
-            <div className="px-4 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl flex items-center gap-x-2 text-xs font-medium text-white/80">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
-              Ritual Chain
-            </div>
+          <div className="flex items-center gap-x-3">
+            {/* Disconnect Button */}
+            {address && (
+              <button
+                onClick={disconnect}
+                className="flex items-center gap-x-2 px-5 h-12 rounded-2xl border border-white/15 hover:bg-white/5 active:scale-[0.985] transition-all text-sm font-medium text-white/70 hover:text-white"
+              >
+                <LogOut size={16} />
+                Disconnect
+              </button>
+            )}
 
             <button
               onClick={connect}
