@@ -31,6 +31,7 @@ export default function RitualFudder() {
   const [address, setAddress] = useState('');
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
+  const [ownedNFTs, setOwnedNFTs] = useState<number[]>([]);
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -66,7 +67,8 @@ export default function RitualFudder() {
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
       
-      const tx = await contract.mint({ value: 0 });
+      // Force legacy transaction (type 0) for Ritual RPC compatibility
+      const tx = await contract.mint({ value: 0, type: 0 });
       await tx.wait();
       
       setStatus('Mint successful!');
