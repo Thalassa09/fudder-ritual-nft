@@ -14,7 +14,7 @@ const ABI = [
 ];
 
 const phases = [
-  { phase: 1, start: 1, end: 25, minted: 6, status: 'live' },
+  { phase: 1, start: 1, end: 25, minted: 0, status: 'live' },
   { phase: 2, start: 26, end: 50, minted: 0, status: 'upcoming' },
   { phase: 3, start: 51, end: 75, minted: 0, status: 'upcoming' },
   { phase: 4, start: 76, end: 100, minted: 0, status: 'upcoming' },
@@ -123,11 +123,11 @@ export default function RitualFudder() {
                 <div className="text-[11px] tracking-[4px] text-white/45 mb-1.5">COLLECTION 001</div>
                 <div className="text-5xl tracking-[-2.2px] font-semibold">Genesis Series</div>
               </div>
-              <div className="text-right text-sm text-white/55 font-mono">6 / 100</div>
+              <div className="text-right text-sm text-white/55 font-mono">0 / 100</div>
             </div>
 
             <div className="text-center py-16 text-white/50">
-              First 6 NFTs already owned. More coming in phases.
+              No NFTs minted yet. Minting starts in Phase 1.
             </div>
           </div>
         )}
