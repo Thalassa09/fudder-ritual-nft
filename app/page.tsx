@@ -164,11 +164,35 @@ export default function RitualFudder() {
         )}
 
         {tab === 'mint' && (
-          <div className="max-w-md mx-auto pt-16 text-center">
-            <div className="text-[110px] mb-4 tracking-[-6px] text-[#C5A26F]/90">🜁</div>
-            <div className="text-5xl tracking-[-2px] font-semibold mb-4">Free Mint</div>
-            <p className="text-white/60 mb-10 text-lg">100 pieces. Only gas fee on Ritual Network.</p>
-            <button onClick={() => setTab('explore')} className="px-14 h-14 rounded-2xl bg-white text-[#0B0B0A] font-medium tracking-[-0.4px] hover:bg-[#C5A26F] active:scale-[0.985] transition-all">Browse Collection</button>
+          <div className="max-w-md mx-auto pt-10 text-center">
+            <div className="inline-block px-5 py-1.5 rounded-full bg-white/5 text-xs tracking-[2.5px] mb-6 border border-white/10">
+              PHASE 1 — MINTING LIVE
+            </div>
+            
+            <div className="text-6xl tracking-[-2.5px] font-semibold mb-4">Minting Open</div>
+            <p className="text-white/60 text-lg mb-10">Free mint. Only gas. Collection will be revealed after 100 minted.</p>
+
+            <div className="bg-[#121210] border border-white/10 rounded-3xl p-8 text-left">
+              <div className="flex justify-between text-sm mb-3">
+                <span className="text-white/60">Total Supply</span>
+                <span>100</span>
+              </div>
+              <div className="flex justify-between text-sm mb-3">
+                <span className="text-white/60">Price</span>
+                <span>Free</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-white/60">Reveal Status</span>
+                <span className="text-[#C5A26F]">Not Revealed</span>
+              </div>
+            </div>
+
+            <button 
+              onClick={() => setTab('explore')} 
+              className="mt-8 px-10 h-14 rounded-2xl bg-white text-[#0B0B0A] font-medium tracking-[-0.4px] hover:bg-[#C5A26F] active:scale-[0.985] transition-all"
+            >
+              Browse Collection
+            </button>
           </div>
         )}
 
