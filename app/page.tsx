@@ -67,7 +67,7 @@ export default function RitualFudder() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans">
+    <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
       {/* Nav */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
@@ -75,7 +75,7 @@ export default function RitualFudder() {
             <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center">
               <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-2px]">R</span>
             </div>
-            <div className="font-semibold text-[21px] tracking-[-1.8px] font-serif">Ritual Fudder</div>
+            <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
           </div>
 
           <button
@@ -107,7 +107,7 @@ export default function RitualFudder() {
           <div className="inline-block px-6 py-2 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-8 border border-white/10">
             RITUAL NETWORK • FREE MINT
           </div>
-          <h1 className="text-[92px] leading-[0.92] font-serif font-semibold tracking-[-8.5px] mb-7">
+          <h1 className="text-[92px] leading-[0.92] font-semibold tracking-[-8.5px] mb-7">
             Genesis.<br />On-chain.<br />Forever.
           </h1>
           <p className="text-2xl text-white/70 tracking-[-0.6px]">Each phase reveals after 25 NFTs minted.</p>
@@ -121,7 +121,7 @@ export default function RitualFudder() {
             <div className="flex justify-between items-end mb-10">
               <div>
                 <div className="text-xs tracking-[4px] text-white/50 mb-2">COLLECTION 001</div>
-                <div className="text-7xl tracking-[-3px] font-serif font-semibold">Genesis Series</div>
+                <div className="text-7xl tracking-[-3px] font-semibold">Genesis Series</div>
               </div>
               <div className="text-sm text-white/60 font-mono">0 / 100</div>
             </div>
@@ -135,7 +135,7 @@ export default function RitualFudder() {
               <div className="inline-block px-6 py-2 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-8 border border-white/10">
                 4 PHASES • 25 NFT EACH
               </div>
-              <div className="text-8xl tracking-[-4px] font-serif font-semibold mb-6">Minting Phases</div>
+              <div className="text-8xl tracking-[-4px] font-semibold mb-6">Minting Phases</div>
               <p className="text-2xl text-white/60 tracking-[-0.5px]">Each phase reveals only after 25 NFTs are minted.</p>
             </div>
 
@@ -151,7 +151,7 @@ export default function RitualFudder() {
                           {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
                         </div>
                       </div>
-                      <div className="text-6xl tracking-[-2.5px] font-serif font-semibold">#{p.start} — #{p.end}</div>
+                      <div className="text-6xl tracking-[-2.5px] font-semibold">#{p.start} — #{p.end}</div>
                     </div>
 
                     <div className="flex-1 w-full md:w-auto">
