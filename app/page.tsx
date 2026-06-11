@@ -139,8 +139,7 @@ export default function RitualFudder() {
           <div>
             <div className="flex justify-between items-end mb-10">
               <div>
-                <div className="text-xs tracking-[4px] text-white/50 mb-2">COLLECTION 001</div>
-                <div className="text-7xl tracking-[-3px] font-semibold">Genesis Series</div>
+                <div className="text-5xl tracking-[-2px] font-semibold">The Ritual Collection</div>
               </div>
               <div className="text-sm text-white/60 font-mono">0 / 100</div>
             </div>
@@ -148,7 +147,7 @@ export default function RitualFudder() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {phases.map((p, index) => (
                 <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl p-9">
-                  <div className="text-xs tracking-[4px] text-white/50 mb-2">COLLECTION {p.phase}</div>
+                  
                   <div className="text-4xl tracking-[-1.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
                   <div className="text-2xl text-[#C5A26F] font-medium mb-6">{p.name}</div>
                   
