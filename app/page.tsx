@@ -80,7 +80,7 @@ export default function RitualFudder() {
               <span className="text-[#0A0A09] font-bold text-[24px] tracking-[-2.5px]">R</span>
             </div>
             <div>
-              <div className="font-semibold text-[22px] tracking-[-1.6px]">Ritual Fudder</div>
+              <div className="font-semibold text-[23px] tracking-[3px] uppercase">Ritual Fudder NFT</div>
             </div>
           </div>
 
