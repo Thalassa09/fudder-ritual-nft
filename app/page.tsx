@@ -1,23 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Wallet, X, Zap } from 'lucide-react';
-
-interface NFT {
-  id: number;
-  name: string;
-  price: string;
-  minted: boolean;
-}
-
-const initialNFTs: NFT[] = [
-  { id: 1, name: "Ritual Fudder #01", price: "0", minted: true },
-  { id: 2, name: "Ritual Fudder #02", price: "0", minted: true },
-  { id: 3, name: "Ritual Fudder #03", price: "0", minted: true },
-  { id: 4, name: "Ritual Fudder #04", price: "0", minted: true },
-  { id: 5, name: "Ritual Fudder #05", price: "0", minted: true },
-  { id: 6, name: "Ritual Fudder #06", price: "0", minted: true },
-];
+import { Wallet, Zap } from 'lucide-react';
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
 const CONTRACT_ADDRESS = "0xf5CBc369f8f253D6ADD6C17D15fc5483fa8708A3";
@@ -29,12 +13,17 @@ const ABI = [
   "function MAX_SUPPLY() view returns (uint256)"
 ];
 
+const phases = [
+  { phase: 1, start: 1, end: 25, status: 'live' },
+  { phase: 2, start: 26, end: 50, status: 'upcoming' },
+  { phase: 3, start: 51, end: 75, status: 'upcoming' },
+  { phase: 4, start: 76, end: 100, status: 'upcoming' },
+];
+
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
-  const [nfts] = useState(initialNFTs);
   const [status, setStatus] = useState('');
-  const [showMintModal, setShowMintModal] = useState(false);
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -134,66 +123,52 @@ export default function RitualFudder() {
                 <div className="text-[11px] tracking-[4px] text-white/45 mb-1.5">COLLECTION 001</div>
                 <div className="text-5xl tracking-[-2.2px] font-semibold">Genesis Series</div>
               </div>
-              <div className="text-right text-sm text-white/55 font-mono">{nfts.length} / 100</div>
+              <div className="text-right text-sm text-white/55 font-mono">6 / 100</div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {nfts.map((nft) => (
-                <div
-                  key={nft.id}
-                  className={`group bg-[#121210] border border-white/10 rounded-3xl overflow-hidden transition-all opacity-60`}
-                >
-                  <div className="aspect-[16/10] bg-[#1C1B18] relative flex items-center justify-center">
-                    <div className="text-[92px] font-mono text-white/10 tracking-[-8px] font-semibold">#{String(nft.id).padStart(2, '0')}</div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
-                  </div>
-                  <div className="px-7 py-6 flex items-center justify-between border-t border-white/10 bg-[#121210]">
-                    <div>
-                      <div className="font-medium tracking-[-0.35px] text-[15px]">{nft.name}</div>
-                      <div className="text-xs text-[#C5A26F]/80 mt-px">Free Mint • Ritual</div>
-                    </div>
-                    <div className="text-xs px-4 py-1.5 rounded-full border border-white/10 text-white/60">
-                      Owned
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="text-center py-16 text-white/50">
+              First 6 NFTs already owned. More coming in phases.
             </div>
           </div>
         )}
 
         {tab === 'mint' && (
-          <div className="max-w-md mx-auto pt-10 text-center">
-            <div className="inline-block px-5 py-1.5 rounded-full bg-white/5 text-xs tracking-[2.5px] mb-6 border border-white/10">
-              PHASE 1 — MINTING LIVE
-            </div>
-            
-            <div className="text-6xl tracking-[-2.5px] font-semibold mb-4">Minting Open</div>
-            <p className="text-white/60 text-lg mb-10">Free mint. Only gas. Collection will be revealed after 100 minted.</p>
-
-            <div className="bg-[#121210] border border-white/10 rounded-3xl p-8 text-left mb-8">
-              <div className="flex justify-between text-sm mb-3">
-                <span className="text-white/60">Total Supply</span>
-                <span>100</span>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-block px-5 py-1.5 rounded-full bg-white/5 text-xs tracking-[2.5px] mb-6 border border-white/10">
+                4 PHASES • 25 NFT EACH
               </div>
-              <div className="flex justify-between text-sm mb-3">
-                <span className="text-white/60">Price</span>
-                <span>Free</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-white/60">Reveal Status</span>
-                <span className="text-[#C5A26F]">Not Revealed</span>
-              </div>
+              <div className="text-6xl tracking-[-2.5px] font-semibold mb-4">Minting Phases</div>
+              <p className="text-white/60 text-lg">Free mint. Only gas. Collection will be revealed after 100 minted.</p>
             </div>
 
-            <button 
-              onClick={mint}
-              disabled={!address}
-              className="w-full flex items-center justify-center gap-x-3 h-14 rounded-2xl bg-white text-[#0B0B0A] font-medium tracking-[-0.4px] hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
-            >
-              <Zap size={19} /> Mint Now
-            </button>
-            {!address && <div className="text-xs mt-4 text-white/50">Connect wallet first</div>}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+              {phases.map((p, index) => (
+                <div key={index} className={`bg-[#121210] border rounded-3xl p-8 ${p.status === 'live' ? 'border-[#C5A26F]' : 'border-white/10'}`}>
+                  <div className="flex justify-between items-center mb-6">
+                    <div>
+                      <div className="text-xs tracking-[3px] text-white/50">PHASE {p.phase}</div>
+                      <div className="text-3xl tracking-[-1px] mt-1">#{p.start} — #{p.end}</div>
+                    </div>
+                    <div className={`text-xs px-4 py-1.5 rounded-full border ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
+                      {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
+                    </div>
+                  </div>
+                  
+                  {p.status === 'live' && (
+                    <button 
+                      onClick={mint}
+                      disabled={!address}
+                      className="w-full flex items-center justify-center gap-x-3 h-12 rounded-2xl bg-white text-[#0B0B0A] font-medium hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
+                    >
+                      <Zap size={17} /> Mint Phase {p.phase}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {!address && <div className="text-center text-xs text-white/50">Connect wallet to mint</div>}
           </div>
         )}
 
