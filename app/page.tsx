@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Wallet, Zap, LogOut } from 'lucide-react';
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
-const CONTRACT_ADDRESS = "0xf5CBc369f8f253D6ADD6C17D15fc5483fa8708A3";
+const CONTRACT_ADDRESS = "0x644A6A11d0C2a68119dAdDc22164f40a6A325f84";
 const RITUAL_CHAIN_ID = 1979;
 
 const ABI = [
