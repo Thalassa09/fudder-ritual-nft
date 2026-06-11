@@ -145,7 +145,7 @@ export default function FudderRitual() {
 
               <div className="flex justify-between text-sm mb-9 px-1">
                 <div><span className="text-white/40">Price</span><br /><span className="font-medium">0.01 ETH</span></div>
-                <div><span className="text-white/40">Supply</span><br /><span className="font-medium">10,000</span></div>
+                <div><span className="text-white/40">Supply</span><br /><span className="font-medium">100</span></div>
               </div>
 
               <button onClick={mint} disabled={!address} className="w-full h-14 bg-white text-[#0F0E0C] rounded-2xl font-medium flex items-center justify-center gap-x-3 disabled:opacity-50 hover:bg-[#8B5E3C] hover:text-white transition-all">
