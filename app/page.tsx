@@ -87,10 +87,11 @@ export default function RitualFudder() {
           </div>
 
           <div className="flex items-center gap-x-4">
-            {/* Network Status */}
+            {/* Network Status - New Design */}
             {address && (
-              <div className={`px-4 h-9 rounded-xl border flex items-center text-xs font-medium ${isOnRitual ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-red-500/50 text-red-400'}`}>
-                {isOnRitual ? 'Ritual Network' : 'Wrong Network'}
+              <div className={`px-4 h-9 rounded-full border flex items-center gap-x-2 text-xs font-medium ${isOnRitual ? 'border-[#22C55E] bg-[#22C55E]/10 text-[#22C55E]' : 'border-red-500/50 bg-red-500/10 text-red-400'}`}>
+                <div className={`w-1.5 h-1.5 rounded-full ${isOnRitual ? 'bg-[#22C55E]' : 'bg-red-400'}`} />
+                {isOnRitual ? 'Ritual Chain' : 'Wrong Network'}
               </div>
             )}
 
