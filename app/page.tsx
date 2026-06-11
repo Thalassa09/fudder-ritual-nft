@@ -68,14 +68,16 @@ export default function RitualFudder() {
 
   return (
     <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
-      {/* Nav - New Design */}
+      {/* Nav */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-x-3">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center">
+          <div className="flex items-center gap-x-3.5">
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
               <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-2.2px]">R</span>
             </div>
-            <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
+            <div>
+              <div className="font-semibold text-[21px] tracking-[-1.4px]">Ritual Fudder</div>
+            </div>
           </div>
 
           <button
@@ -87,18 +89,16 @@ export default function RitualFudder() {
           </button>
         </div>
 
-        {/* Tabs - New Style */}
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-8 text-sm border-t border-white/10">
+        {/* Tabs */}
+        <div className="max-w-7xl mx-auto px-8 flex gap-x-1 text-sm border-t border-white/10">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`py-4 capitalize tracking-[-0.4px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/80'}`}
+              className={`px-5 py-[17px] capitalize tracking-[-0.3px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/80'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
-              {tab === t && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent" />
-              )}
+              {tab === t && <div className="absolute bottom-0 left-5 right-5 h-px bg-white" />}
             </button>
           ))}
         </div>
@@ -132,7 +132,7 @@ export default function RitualFudder() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {phases.map((p, index) => (
                 <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl p-9">
-                  <div className="text-xs tracking-[4px] text-white/50 mb-2">PHASE {p.phase}</div>
+                  <div className="text-xs tracking-[4px] text-white/50 mb-2">COLLECTION {p.phase}</div>
                   <div className="text-4xl tracking-[-1.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
                   <div className="text-2xl text-[#C5A26F] font-medium mb-6">{p.name}</div>
                   
