@@ -87,15 +87,15 @@ export default function RitualFudder() {
           </button>
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-9 text-sm border-t border-white/10">
+        {/* Tabs - Premium Style */}
+        <div className="max-w-7xl mx-auto px-8 flex gap-x-2 text-sm border-t border-white/10 pt-1">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`py-4 capitalize tracking-[-0.5px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/40 hover:text-white/80'}`}
+              className={`px-6 py-3 capitalize tracking-[-0.3px] rounded-xl transition-all font-medium ${tab === t ? 'bg-white text-[#0A0A09]' : 'text-white/60 hover:text-white/90 hover:bg-white/5'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
-              {tab === t && <div className="absolute bottom-0 left-0 right-0 h-px bg-white" />}
             </button>
           ))}
         </div>
