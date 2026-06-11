@@ -7,15 +7,16 @@ interface NFT {
   id: number;
   name: string;
   price: string;
+  minted: boolean;
 }
 
 const initialNFTs: NFT[] = [
-  { id: 1, name: "Ritual Fudder #01", price: "0" },
-  { id: 2, name: "Ritual Fudder #02", price: "0" },
-  { id: 3, name: "Ritual Fudder #03", price: "0" },
-  { id: 4, name: "Ritual Fudder #04", price: "0" },
-  { id: 5, name: "Ritual Fudder #05", price: "0" },
-  { id: 6, name: "Ritual Fudder #06", price: "0" },
+  { id: 1, name: "Ritual Fudder #01", price: "0", minted: true },
+  { id: 2, name: "Ritual Fudder #02", price: "0", minted: true },
+  { id: 3, name: "Ritual Fudder #03", price: "0", minted: true },
+  { id: 4, name: "Ritual Fudder #04", price: "0", minted: true },
+  { id: 5, name: "Ritual Fudder #05", price: "0", minted: true },
+  { id: 6, name: "Ritual Fudder #06", price: "0", minted: true },
 ];
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
@@ -47,6 +48,7 @@ export default function RitualFudder() {
   };
 
   const openMint = (nft: NFT) => {
+    if (nft.minted) return;
     setSelectedNFT(nft);
     setShowMintModal(true);
   };
@@ -140,7 +142,7 @@ export default function RitualFudder() {
                 <div
                   key={nft.id}
                   onClick={() => openMint(nft)}
-                  className="group cursor-pointer bg-[#121210] border border-white/10 rounded-3xl overflow-hidden hover:border-[#C5A26F]/40 transition-all active:scale-[0.985]"
+                  className={`group bg-[#121210] border border-white/10 rounded-3xl overflow-hidden transition-all ${!nft.minted ? 'cursor-pointer hover:border-[#C5A26F]/40 active:scale-[0.985]' : 'opacity-60'}`}
                 >
                   <div className="aspect-[16/10] bg-[#1C1B18] relative flex items-center justify-center">
                     <div className="text-[92px] font-mono text-white/10 tracking-[-8px] font-semibold">#{String(nft.id).padStart(2, '0')}</div>
@@ -151,7 +153,9 @@ export default function RitualFudder() {
                       <div className="font-medium tracking-[-0.35px] text-[15px]">{nft.name}</div>
                       <div className="text-xs text-[#C5A26F]/80 mt-px">Free Mint • Ritual</div>
                     </div>
-                    <div className="text-xs px-4 py-1.5 rounded-full border border-white/10 text-white/60 group-hover:border-[#C5A26F]/30 transition-colors">Mint</div>
+                    <div className="text-xs px-4 py-1.5 rounded-full border border-white/10 text-white/60">
+                      {nft.minted ? 'Owned' : 'Mint'}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -174,7 +178,7 @@ export default function RitualFudder() {
       </div>
 
       {/* Mint Modal */}
-      {showMintModal && selectedNFT && (
+      {showMintModal && selectedNFT && !selectedNFT.minted && (
         <div className="fixed inset-0 bg-black/95 z-[70] flex items-center justify-center p-6">
           <div className="bg-[#121210] border border-white/10 w-full max-w-[380px] rounded-3xl overflow-hidden">
             <div className="p-8">
