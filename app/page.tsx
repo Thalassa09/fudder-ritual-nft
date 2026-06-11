@@ -67,34 +67,34 @@ export default function RitualFudder() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0A] text-[#F5F0E6]">
+    <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] selection:bg-[#C5A26F] selection:text-black">
       {/* Nav */}
-      <nav className="border-b border-white/10 bg-[#0B0B0A]/95 backdrop-blur-xl sticky top-0 z-50">
+      <nav className="border-b border-white/10 bg-[#0A0A09]/90 backdrop-blur-2xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-4">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
-              <span className="text-[#0B0B0A] font-bold text-[22px] tracking-[-1.5px]">R</span>
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-[0_0_0_1px_rgba(197,162,111,0.3)]">
+              <span className="text-[#0A0A09] font-bold text-[22px] tracking-[-1.8px]">R</span>
             </div>
             <div>
-              <div className="font-semibold text-[22px] tracking-[-1.4px]">Ritual Fudder</div>
+              <div className="font-semibold text-[21px] tracking-[-1.6px]">Ritual Fudder</div>
             </div>
           </div>
 
           <button
             onClick={connect}
-            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0B0B0A] active:scale-[0.985] transition-all text-sm"
+            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
           >
             <Wallet size={17} />
             {address ? address.slice(0, 6) + '...' + address.slice(-4) : 'Connect Wallet'}
           </button>
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 flex gap-x-10 text-sm border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-8 flex gap-x-9 text-sm border-t border-white/10">
           {(['explore', 'mint', 'owned'] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`py-4 capitalize tracking-[-0.4px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/75'}`}
+              className={`py-4 capitalize tracking-[-0.5px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/40 hover:text-white/80'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
               {tab === t && <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />}
@@ -104,13 +104,15 @@ export default function RitualFudder() {
       </nav>
 
       {/* Hero */}
-      <div className="max-w-7xl mx-auto px-8 pt-20 pb-16">
-        <div className="max-w-[620px]">
-          <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-7 border border-white/10">RITUAL NETWORK • FREE MINT</div>
-          <h1 className="text-[76px] leading-[0.98] font-semibold tracking-[-6.2px] mb-5">
+      <div className="max-w-7xl mx-auto px-8 pt-20 pb-20">
+        <div className="max-w-[680px]">
+          <div className="inline-block px-5 py-1.5 rounded-full bg-white/5 text-xs tracking-[3.2px] mb-8 border border-white/10">
+            RITUAL NETWORK • FREE MINT
+          </div>
+          <h1 className="text-[82px] leading-[0.95] font-semibold tracking-[-7.2px] mb-6">
             Genesis.<br />On-chain.<br />Forever.
           </h1>
-          <p className="text-[17px] text-white/65 tracking-[-0.35px]">Each phase reveals after 25 NFTs minted.</p>
+          <p className="text-[18px] text-white/70 tracking-[-0.4px]">Each phase reveals after 25 NFTs minted.</p>
         </div>
       </div>
 
@@ -120,59 +122,62 @@ export default function RitualFudder() {
           <div>
             <div className="flex justify-between items-end mb-9">
               <div>
-                <div className="text-[11px] tracking-[4px] text-white/45 mb-1.5">COLLECTION 001</div>
-                <div className="text-5xl tracking-[-2.2px] font-semibold">Genesis Series</div>
+                <div className="text-[11px] tracking-[4px] text-white/45 mb-2">COLLECTION 001</div>
+                <div className="text-6xl tracking-[-2.5px] font-semibold">Genesis Series</div>
               </div>
               <div className="text-right text-sm text-white/55 font-mono">0 / 100</div>
             </div>
 
-            <div className="text-center py-16 text-white/50">
+            <div className="text-center py-20 text-white/50 text-lg">
               No NFTs minted yet. Minting starts in Phase 1.
             </div>
           </div>
         )}
 
         {tab === 'mint' && (
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-block px-5 py-1.5 rounded-full bg-white/5 text-xs tracking-[2.5px] mb-6 border border-white/10">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-14">
+              <div className="inline-block px-6 py-2 rounded-full bg-white/5 text-xs tracking-[3px] mb-7 border border-white/10">
                 4 PHASES • 25 NFT EACH
               </div>
-              <div className="text-6xl tracking-[-2.5px] font-semibold mb-4">Minting Phases</div>
-              <p className="text-white/60 text-lg">Each phase reveals only after 25 NFTs are minted.</p>
+              <div className="text-7xl tracking-[-3px] font-semibold mb-5">Minting Phases</div>
+              <p className="text-xl text-white/60 tracking-[-0.4px]">Each phase reveals only after 25 NFTs are minted.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {phases.map((p, index) => {
                 const isRevealed = p.minted === 25;
                 return (
-                  <div key={index} className={`bg-[#121210] border rounded-3xl p-8 ${p.status === 'live' ? 'border-[#C5A26F]' : 'border-white/10'}`}>
-                    <div className="flex justify-between items-center mb-6">
+                  <div 
+                    key={index} 
+                    className={`group bg-[#11110F] border rounded-3xl p-9 transition-all ${p.status === 'live' ? 'border-[#C5A26F]/60 hover:border-[#C5A26F]' : 'border-white/10'}`}
+                  >
+                    <div className="flex justify-between items-start mb-8">
                       <div>
-                        <div className="text-xs tracking-[3px] text-white/50">PHASE {p.phase}</div>
-                        <div className="text-3xl tracking-[-1px] mt-1">#{p.start} — #{p.end}</div>
+                        <div className="text-xs tracking-[4px] text-white/50">PHASE {p.phase}</div>
+                        <div className="text-5xl tracking-[-2px] mt-3 font-semibold">#{p.start} — #{p.end}</div>
                       </div>
-                      <div className={`text-xs px-4 py-1.5 rounded-full border ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
+                      <div className={`text-xs px-5 py-2 rounded-full border font-medium ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
                         {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
                       </div>
                     </div>
 
-                    <div className="mb-6">
-                      <div className="flex justify-between text-sm mb-2">
+                    <div className="mb-8">
+                      <div className="flex justify-between text-sm mb-3">
                         <span className="text-white/60">Minted</span>
-                        <span>{p.minted} / 25</span>
+                        <span className="font-mono">{p.minted} / 25</span>
                       </div>
-                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-[3px] bg-white/10 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-[#C5A26F] transition-all" 
+                          className="h-full bg-gradient-to-r from-[#C5A26F] to-[#A67C52] transition-all duration-500" 
                           style={{ width: `${(p.minted / 25) * 100}%` }}
                         />
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center text-sm">
+                    <div className="flex justify-between items-center text-sm mb-8">
                       <span className="text-white/60">Reveal Status</span>
-                      <span className={isRevealed ? 'text-[#C5A26F]' : 'text-white/50'}>
+                      <span className={isRevealed ? 'text-[#C5A26F] font-medium' : 'text-white/50'}>
                         {isRevealed ? 'Revealed' : 'Not Revealed'}
                       </span>
                     </div>
@@ -181,9 +186,9 @@ export default function RitualFudder() {
                       <button 
                         onClick={mint}
                         disabled={!address}
-                        className="mt-6 w-full flex items-center justify-center gap-x-3 h-12 rounded-2xl bg-white text-[#0B0B0A] font-medium hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
+                        className="w-full flex items-center justify-center gap-x-3 h-14 rounded-2xl bg-white text-[#0A0A09] font-medium tracking-[-0.4px] hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
                       >
-                        <Zap size={17} /> Mint Phase {p.phase}
+                        <Zap size={18} /> Mint Phase {p.phase}
                       </button>
                     )}
                   </div>
@@ -191,17 +196,17 @@ export default function RitualFudder() {
               })}
             </div>
 
-            {!address && <div className="text-center text-xs text-white/50">Connect wallet to mint</div>}
+            {!address && <div className="text-center text-sm text-white/50 mt-8">Connect wallet to start minting</div>}
           </div>
         )}
 
         {tab === 'owned' && (
-          <div className="pt-20 text-center text-white/50">Connect wallet to see your collection.</div>
+          <div className="pt-24 text-center text-white/50 text-lg">Connect wallet to see your collection.</div>
         )}
       </div>
 
       {status && (
-        <div className="fixed bottom-9 left-1/2 -translate-x-1/2 bg-[#1C1B18] border border-white/10 px-8 h-12 rounded-2xl flex items-center text-sm tracking-[-0.2px]">
+        <div className="fixed bottom-10 left-1/2 -translate-x-1/2 bg-[#1C1B18] border border-white/10 px-9 h-12 rounded-2xl flex items-center text-sm tracking-[-0.3px]">
           {status}
         </div>
       )}
