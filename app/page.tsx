@@ -25,7 +25,7 @@ export default function RitualFudder() {
   const style = `
     @keyframes moveLines {
       0% { background-position: 0 0; }
-      100% { background-position: 300px 300px; }
+      100% { background-position: 600px 600px; }
     }
   `;
   const [address, setAddress] = useState('');
@@ -82,9 +82,10 @@ export default function RitualFudder() {
       <style>{style}</style>
       {/* Animated Random Lines Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,#ffffff08_0px,#ffffff08_1px,transparent_1px,transparent_80px)] animate-[moveLines_25s_linear_infinite]" />
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(-120deg,#ffffff05_0px,#ffffff05_1px,transparent_1px,transparent_120px)] animate-[moveLines_40s_linear_infinite]" />
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(70deg,#ffffff04_0px,#ffffff04_1px,transparent_1px,transparent_60px)] animate-[moveLines_18s_linear_infinite]" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(142deg,#ffffff0a_0px,#ffffff0a_1px,transparent_1px,transparent_65px)] animate-[moveLines_12s_linear_infinite]" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(-95deg,#ffffff06_0px,#ffffff06_1px,transparent_1px,transparent_95px)] animate-[moveLines_19s_linear_infinite]" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(48deg,#ffffff05_0px,#ffffff05_1px,transparent_1px,transparent_55px)] animate-[moveLines_9s_linear_infinite]" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(-160deg,#ffffff04_0px,#ffffff04_1px,transparent_1px,transparent_110px)] animate-[moveLines_27s_linear_infinite]" />
       </div>
       {/* Nav */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
