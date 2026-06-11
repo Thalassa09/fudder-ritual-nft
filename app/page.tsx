@@ -99,9 +99,6 @@ export default function FudderRitualNFT() {
       <nav className="border-b border-[#e8e0d5] bg-[#f5f0e8] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-x-3">
-            <div className="w-9 h-9 rounded-full bg-[#1C1917] flex items-center justify-center">
-              <span className="text-[#f5f0e8] text-xl font-semibold">F</span>
-            </div>
             <div>
               <div className="font-semibold tracking-tight text-2xl">Fudder</div>
               <div className="text-[10px] text-[#8B5E3C] -mt-1">Ritual NFT</div>
