@@ -14,10 +14,10 @@ const ABI = [
 ];
 
 const phases = [
-  { phase: 1, start: 1, end: 25, minted: 0, status: 'live', name: "The First Rite" },
-  { phase: 2, start: 26, end: 50, minted: 0, status: 'upcoming', name: "The Forgotten Sigil" },
-  { phase: 3, start: 51, end: 75, minted: 0, status: 'upcoming', name: "The Eternal Flame" },
-  { phase: 4, start: 76, end: 100, minted: 0, status: 'upcoming', name: "The Final Offering" },
+  { phase: 1, start: 1, end: 25, minted: 0, status: 'live', name: "The First Rite", unlockNote: "" },
+  { phase: 2, start: 26, end: 50, minted: 0, status: 'locked', name: "The Forgotten Sigil", unlockNote: "Unlocks 24h after Phase 1 is fully minted" },
+  { phase: 3, start: 51, end: 75, minted: 0, status: 'locked', name: "The Eternal Flame", unlockNote: "Unlocks 24h after Phase 2 is fully minted" },
+  { phase: 4, start: 76, end: 100, minted: 0, status: 'locked', name: "The Final Offering", unlockNote: "Unlocks 24h after Phase 3 is fully minted" },
 ];
 
 export default function RitualFudder() {
@@ -155,7 +155,11 @@ export default function RitualFudder() {
                 <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl p-9">
                   
                   <div className="text-4xl tracking-[-1.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
-                  <div className="text-2xl text-[#C5A26F] font-medium mb-6">{p.name}</div>
+                  <div className="text-2xl text-[#C5A26F] font-medium mb-2">{p.name}</div>
+                  
+                  {p.status === "locked" && (
+                    <div className="text-xs text-white/40 mb-4 italic">{p.unlockNote}</div>
+                  )}
                   
                   <div className="flex justify-between text-sm">
                     <span className="text-white/60">Minted</span>
