@@ -254,6 +254,30 @@ export default function RitualFudder() {
           <div>
             {!address ? (
               <div className="pt-24 text-center text-white/50">Connect wallet to see your collection.</div>
+            ) : ownedNFTs.length > 0 ? (
+              <div className="pt-12">
+                <div className="text-center mb-12">
+                  <div className="text-6xl tracking-[-2px] font-semibold mb-3">Your Collection</div>
+                  <p className="text-white/60">You own {ownedNFTs.length} NFT{ownedNFTs.length > 1 ? "s" : ""}</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {ownedNFTs.map((tokenId, index) => (
+                    <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl overflow-hidden">
+                      <div className="aspect-square bg-[#1a1916] flex items-center justify-center">
+                        <img 
+                          src="/nfts/phase-1/#1" 
+                          alt={`NFT #${tokenId}`} 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                      <div className="p-5">
+                        <div className="font-mono text-sm text-white/50">#{tokenId}</div>
+                        <div className="text-lg font-medium mt-1">The First Rite</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             ) : (
               <div className="pt-12">
                 <div className="text-center mb-12">
