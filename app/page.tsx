@@ -65,10 +65,18 @@ export default function RitualFudder() {
       setStatus('Minting on Ritual Network...');
       
       const signer = await provider.getSigner();
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
       
-      // Force legacy transaction (type 0) for Ritual RPC compatibility
-      const tx = await contract.mint({ value: 0, type: 0 });
+      // Encode mint() function call
+      const iface = new ethers.Interface(ABI);
+      const data = iface.encodeFunctionData("mint");
+      
+      // Send legacy transaction (type 0)
+      const tx = await signer.sendTransaction({
+        to: CONTRACT_ADDRESS,
+        data: data,
+        value: 0,
+        type: 0
+      });
       await tx.wait();
       
       setStatus('Mint successful!');
