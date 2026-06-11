@@ -22,8 +22,11 @@ const phases = [
 
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
+  const [chainId, setChainId] = useState<number | null>(null);
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
+
+  const isOnRitual = chainId === RITUAL_CHAIN_ID;
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -33,6 +36,9 @@ export default function RitualFudder() {
       await p.send('eth_requestAccounts', []);
       const s = await p.getSigner();
       setAddress(await s.getAddress());
+      
+      const network = await p.getNetwork();
+      setChainId(Number(network.chainId));
     } catch {}
   };
 
@@ -68,10 +74,10 @@ export default function RitualFudder() {
 
   return (
     <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
-      {/* Nav - Major Redesign */}
+      {/* Nav */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-3.5">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#C5A26F] via-[#A67C52] to-[#8B6F47] flex items-center justify-center shadow-inner">
               <span className="text-[#0A0A09] font-bold text-[24px] tracking-[-2.5px]">R</span>
             </div>
@@ -80,16 +86,25 @@ export default function RitualFudder() {
             </div>
           </div>
 
-          <button
-            onClick={connect}
-            className="flex items-center gap-x-2.5 px-8 h-12 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
-          >
-            <Wallet size={18} />
-            {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
-          </button>
+          <div className="flex items-center gap-x-4">
+            {/* Network Status */}
+            {address && (
+              <div className={`px-4 h-9 rounded-xl border flex items-center text-xs font-medium ${isOnRitual ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-red-500/50 text-red-400'}`}>
+                {isOnRitual ? 'Ritual Network' : 'Wrong Network'}
+              </div>
+            )}
+
+            <button
+              onClick={connect}
+              className="flex items-center gap-x-2.5 px-8 h-12 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
+            >
+              <Wallet size={18} />
+              {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
+            </button>
+          </div>
         </div>
 
-        {/* Tabs - Major Redesign */}
+        {/* Tabs */}
         <div className="max-w-7xl mx-auto px-8 flex gap-x-2 text-sm border-t border-white/10 bg-[#0A0A09]">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
