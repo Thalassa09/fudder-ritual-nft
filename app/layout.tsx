@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Instrument_Serif, Space_Mono } from "next/font/google";
+import { Manrope, Playfair_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${instrumentSerif.variable} ${spaceMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${manrope.variable} ${playfair.variable} ${spaceMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
