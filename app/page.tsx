@@ -39,39 +39,36 @@ export default function FudderRitual() {
   const mint = async () => {
     if (!address) return alert('Connect first');
     setStatus('Minting...');
-    // placeholder
     setTimeout(() => setStatus('Mint successful'), 1200);
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] text-[#1C1917] font-sans">
+    <div className="min-h-screen bg-[#121110] text-[#f5f0e8]">
       {/* Nav */}
-      <nav className="border-b border-[#e8e0d5]">
+      <nav className="border-b border-white/10">
         <div className="max-w-6xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3">
             <img src="/logo.png" className="w-9 h-9 rounded-xl" alt="" />
-            <div>
-              <div className="font-semibold tracking-[-0.5px] text-[21px]">Fudder</div>
-            </div>
+            <div className="font-semibold tracking-[-0.5px] text-[21px]">Fudder</div>
           </div>
 
           <div className="flex items-center gap-x-4">
             <div className="relative w-72">
-              <Search size={17} className="absolute left-4 top-3.5 text-[#8B5E3C]" />
+              <Search size={17} className="absolute left-4 top-3.5 text-white/40" />
               <input 
                 placeholder="Search Ritual NFTs" 
-                className="w-full bg-white border border-[#e8e0d5] pl-11 h-11 rounded-2xl text-sm placeholder:text-[#8B5E3C]/60 focus:outline-none focus:border-[#8B5E3C]" 
+                className="w-full bg-white/5 border border-white/10 pl-11 h-11 rounded-2xl text-sm placeholder:text-white/40 focus:outline-none focus:border-white/30" 
               />
             </div>
-            <button onClick={connect} className="px-6 h-11 rounded-2xl border border-[#1C1917] text-sm hover:bg-[#1C1917] hover:text-[#f5f0e8] transition-all">
+            <button onClick={connect} className="px-6 h-11 rounded-2xl border border-white/20 text-sm hover:bg-white hover:text-[#121110] transition-all">
               {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
             </button>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-8 flex gap-x-9 text-sm border-t border-[#e8e0d5]">
+        <div className="max-w-6xl mx-auto px-8 flex gap-x-9 text-sm border-t border-white/10">
           {(['explore','mint','owned'] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)} className={`py-4 capitalize tracking-[-0.2px] ${tab===t ? 'border-b-2 border-[#1C1917] font-medium' : 'text-[#8B5E3C]'}`}>
+            <button key={t} onClick={() => setTab(t)} className={`py-4 capitalize tracking-[-0.2px] ${tab===t ? 'border-b-2 border-white font-medium' : 'text-white/50'}`}>
               {t === 'owned' ? 'My Collection' : t}
             </button>
           ))}
@@ -79,29 +76,28 @@ export default function FudderRitual() {
       </nav>
 
       <div className="max-w-6xl mx-auto px-8 pt-12 pb-24">
-        {/* Explore */}
         {tab === 'explore' && (
           <>
             <div className="flex items-end justify-between mb-9">
               <div>
-                <div className="uppercase tracking-[3px] text-xs text-[#8B5E3C] mb-2">Ritual Testnet</div>
+                <div className="uppercase tracking-[3px] text-xs text-white/50 mb-2">Ritual Testnet</div>
                 <div className="text-6xl font-semibold tracking-[-3px]">Ritual Genesis</div>
               </div>
-              <div className="text-[#8B5E3C] text-sm">6,420 NFTs • 214 Holders</div>
+              <div className="text-white/50 text-sm">6,420 NFTs • 214 Holders</div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {nfts.map(nft => (
-                <div key={nft.id} className="bg-white border border-[#e8e0d5] rounded-3xl overflow-hidden group">
-                  <div className="h-56 bg-[#f8f3eb] flex items-center justify-center text-[72px] text-[#8B5E3C]/70">∞</div>
+                <div key={nft.id} className="bg-[#1C1917] border border-white/10 rounded-3xl overflow-hidden group">
+                  <div className="h-56 bg-black/40 flex items-center justify-center text-[72px] text-white/30">∞</div>
                   <div className="p-5">
                     <div className="font-medium tracking-[-0.3px] mb-4">{nft.name}</div>
                     <div className="flex items-center justify-between text-sm">
                       <div>
-                        <div className="text-[#8B5E3C] text-xs">Price</div>
+                        <div className="text-white/50 text-xs">Price</div>
                         <div className="font-mono font-medium">{nft.price} ETH</div>
                       </div>
-                      <button className="px-6 py-2 rounded-2xl bg-[#1C1917] text-[#f5f0e8] text-sm hover:bg-[#8B5E3C] transition-all">Buy</button>
+                      <button className="px-6 py-2 rounded-2xl bg-white text-[#121110] text-sm hover:bg-[#8B5E3C] hover:text-white transition-all">Buy</button>
                     </div>
                   </div>
                 </div>
@@ -110,46 +106,44 @@ export default function FudderRitual() {
           </>
         )}
 
-        {/* Mint */}
         {tab === 'mint' && (
           <div className="max-w-md mx-auto pt-10">
             <div className="text-center mb-9">
-              <div className="text-xs tracking-[3px] text-[#8B5E3C] mb-3">RITUAL TESTNET</div>
+              <div className="text-xs tracking-[3px] text-white/50 mb-3">RITUAL TESTNET</div>
               <div className="text-6xl font-semibold tracking-[-2.8px]">Mint</div>
             </div>
 
-            <div className="bg-white border border-[#e8e0d5] rounded-3xl p-9">
-              <div className="h-72 bg-[#f8f3eb] rounded-2xl flex items-center justify-center mb-8">
+            <div className="bg-[#1C1917] border border-white/10 rounded-3xl p-9">
+              <div className="h-72 bg-black/40 rounded-2xl flex items-center justify-center mb-8">
                 <div className="text-center">
-                  <div className="text-8xl text-[#8B5E3C]">∞</div>
+                  <div className="text-8xl text-white/30">∞</div>
                   <div className="mt-3 font-medium">Ritual Genesis</div>
                 </div>
               </div>
 
               <div className="space-y-4 text-sm mb-8">
-                <div className="flex justify-between"><span className="text-[#8B5E3C]">Price</span><span className="font-medium">0.01 ETH</span></div>
-                <div className="flex justify-between"><span className="text-[#8B5E3C]">Supply</span><span className="font-medium">10,000 / 10,000</span></div>
+                <div className="flex justify-between"><span className="text-white/50">Price</span><span className="font-medium">0.01 ETH</span></div>
+                <div className="flex justify-between"><span className="text-white/50">Supply</span><span className="font-medium">10,000 / 10,000</span></div>
               </div>
 
-              <button onClick={mint} disabled={!address} className="w-full h-14 bg-[#1C1917] text-[#f5f0e8] rounded-2xl font-medium flex items-center justify-center gap-x-2 disabled:opacity-60 hover:bg-[#8B5E3C]">
+              <button onClick={mint} disabled={!address} className="w-full h-14 bg-white text-[#121110] rounded-2xl font-medium flex items-center justify-center gap-x-2 disabled:opacity-60 hover:bg-[#8B5E3C] hover:text-white">
                 Mint Now <ArrowRight size={19} />
               </button>
             </div>
-            {status && <div className="text-center mt-6 text-sm text-[#8B5E3C]">{status}</div>}
+            {status && <div className="text-center mt-6 text-sm text-white/60">{status}</div>}
           </div>
         )}
 
-        {/* Owned */}
         {tab === 'owned' && (
           <div>
             <div className="text-4xl font-semibold tracking-[-1.2px] mb-8">My Collection</div>
             {!address ? (
-              <div className="text-[#8B5E3C] py-20 text-center">Connect wallet to view your collection</div>
+              <div className="text-white/50 py-20 text-center">Connect wallet to view your collection</div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {nfts.slice(0,3).map(n => (
-                  <div key={n.id} className="bg-white border border-[#e8e0d5] rounded-3xl p-5">
-                    <div className="h-44 bg-[#f8f3eb] rounded-2xl flex items-center justify-center text-6xl text-[#8B5E3C]">∞</div>
+                  <div key={n.id} className="bg-[#1C1917] border border-white/10 rounded-3xl p-5">
+                    <div className="h-44 bg-black/40 rounded-2xl flex items-center justify-center text-6xl text-white/30">∞</div>
                     <div className="mt-5 font-medium">{n.name}</div>
                   </div>
                 ))}
