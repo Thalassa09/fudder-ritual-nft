@@ -87,13 +87,11 @@ export default function RitualFudder() {
           </div>
 
           <div className="flex items-center gap-x-4">
-            {/* Network Status - Glassmorphism */}
-            {address && (
-              <div className="px-4 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl flex items-center gap-x-2 text-xs font-medium text-white/80">
-                <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
-                Ritual Chain
-              </div>
-            )}
+            {/* Network Status - Always Visible */}
+            <div className="px-4 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl flex items-center gap-x-2 text-xs font-medium text-white/80">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
+              Ritual Chain
+            </div>
 
             <button
               onClick={connect}
