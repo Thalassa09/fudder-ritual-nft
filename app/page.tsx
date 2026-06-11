@@ -8,7 +8,7 @@ const CONTRACT_ADDRESS = "0x644A6A11d0C2a68119dAdDc22164f40a6A325f84";
 const RITUAL_CHAIN_ID = 1979;
 
 const ABI = [
-  "function mint() payable",
+  "function mint()",
   "function nextTokenId() view returns (uint256)",
   "function MAX_SUPPLY() view returns (uint256)"
 ];
