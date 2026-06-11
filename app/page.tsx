@@ -19,6 +19,13 @@ const initialNFTs: NFT[] = [
 ];
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
+const CONTRACT_ADDRESS = "0xf5CBc369f8f253D6ADD6C17D15fc5483fa8708A3";
+
+const ABI = [
+  "function mint() payable",
+  "function nextTokenId() view returns (uint256)",
+  "function MAX_SUPPLY() view returns (uint256)"
+];
 
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
@@ -46,12 +53,26 @@ export default function RitualFudder() {
 
   const mint = async () => {
     if (!address || !selectedNFT) return;
-    setStatus('Minting on Ritual Testnet...');
-    setTimeout(() => {
-      setStatus('Mint successful');
+    
+    try {
+      setStatus('Minting on Ritual Network...');
+      
+      const { ethers } = await import('ethers');
+      const provider = new ethers.BrowserProvider((window as any).ethereum);
+      const signer = await provider.getSigner();
+      
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+      
+      const tx = await contract.mint({ value: 0 });
+      await tx.wait();
+      
+      setStatus('Mint successful!');
       setShowMintModal(false);
-      setTimeout(() => setStatus(''), 2200);
-    }, 1800);
+      setTimeout(() => setStatus(''), 2500);
+    } catch (error: any) {
+      setStatus('Mint failed: ' + (error.reason || error.message));
+      setTimeout(() => setStatus(''), 4000);
+    }
   };
 
   return (
@@ -94,7 +115,7 @@ export default function RitualFudder() {
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-8 pt-20 pb-16">
         <div className="max-w-[620px]">
-          <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-7 border border-white/10">RITUAL TESTNET • FREE MINT</div>
+          <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-7 border border-white/10">RITUAL NETWORK • FREE MINT</div>
           <h1 className="text-[76px] leading-[0.98] font-semibold tracking-[-6.2px] mb-5">
             Genesis.<br />On-chain.<br />Forever.
           </h1>
@@ -142,7 +163,7 @@ export default function RitualFudder() {
           <div className="max-w-md mx-auto pt-16 text-center">
             <div className="text-[110px] mb-4 tracking-[-6px] text-[#C5A26F]/90">🜁</div>
             <div className="text-5xl tracking-[-2px] font-semibold mb-4">Free Mint</div>
-            <p className="text-white/60 mb-10 text-lg">100 pieces. Only gas fee on Ritual Testnet.</p>
+            <p className="text-white/60 mb-10 text-lg">100 pieces. Only gas fee on Ritual Network.</p>
             <button onClick={() => setTab('explore')} className="px-14 h-14 rounded-2xl bg-white text-[#0B0B0A] font-medium tracking-[-0.4px] hover:bg-[#C5A26F] active:scale-[0.985] transition-all">Browse Collection</button>
           </div>
         )}
@@ -167,8 +188,8 @@ export default function RitualFudder() {
 
               <div className="space-y-px text-sm">
                 <div className="flex justify-between py-[17px] border-b border-white/10"><span className="text-white/55">Price</span><span>Free</span></div>
-                <div className="flex justify-between py-[17px] border-b border-white/10"><span className="text-white/55">Network</span><span>Ritual Testnet</span></div>
-                <div className="flex justify-between py-[17px]"><span className="text-white/55">Gas Fee</span><span className="text-[#C5A26F]">~0.00001 RITUAL</span></div>
+                <div className="flex justify-between py-[17px] border-b border-white/10"><span className="text-white/55">Network</span><span>Ritual Network</span></div>
+                <div className="flex justify-between py-[17px]"><span className="text-white/55">Gas Fee</span><span className="text-[#C5A26F]">Only gas</span></div>
               </div>
             </div>
 
