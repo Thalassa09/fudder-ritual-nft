@@ -19,7 +19,7 @@ const initialNFTs: NFT[] = [
   { id: 6, name: "Ritual Genesis #06", price: "0.074" },
 ];
 
-const OWNER_ADDRESS = "0x0000000000000000000000000000000000000000"; // ganti dengan wallet kamu
+const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D"; // ganti dengan wallet kamu
 
 export default function FudderRitual() {
   const [address, setAddress] = useState('');
