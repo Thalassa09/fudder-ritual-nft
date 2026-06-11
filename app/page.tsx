@@ -147,8 +147,8 @@ export default function RitualFudder() {
           <div className="inline-block px-6 py-2 rounded-full bg-white/5 text-xs tracking-[3.5px] mb-8 border border-white/10">
             RITUAL NETWORK • FREE MINT
           </div>
-          <h1 className="text-[92px] leading-[0.92] font-semibold tracking-[-8.5px] mb-7">
-            Genesis.<br />On-chain.<br />Forever.
+          <h1 className="text-[88px] leading-[0.9] font-semibold tracking-[-7px] mb-7">
+            Four Rites.<br />One Chain.
           </h1>
           <p className="text-2xl text-white/70 tracking-[-0.6px]">Each phase reveals after 25 NFTs minted.</p>
         </div>
