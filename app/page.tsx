@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Wallet, Zap } from 'lucide-react';
 
 const OWNER_ADDRESS = "0x3883f0dDccC55Ac112173BC67584952Bf13B1A7D";
@@ -22,8 +22,11 @@ const phases = [
 
 export default function RitualFudder() {
   const [address, setAddress] = useState('');
+  const [chainId, setChainId] = useState<number | null>(null);
   const [tab, setTab] = useState<'explore' | 'mint' | 'owned'>('explore');
   const [status, setStatus] = useState('');
+
+  const isOnRitual = chainId === RITUAL_CHAIN_ID;
 
   const connect = async () => {
     if (!(window as any).ethereum) return alert('Install MetaMask');
@@ -33,8 +36,20 @@ export default function RitualFudder() {
       await p.send('eth_requestAccounts', []);
       const s = await p.getSigner();
       setAddress(await s.getAddress());
+      
+      const network = await p.getNetwork();
+      setChainId(Number(network.chainId));
     } catch {}
   };
+
+  // Listen to network changes
+  useEffect(() => {
+    if ((window as any).ethereum) {
+      (window as any).ethereum.on('chainChanged', (chain: string) => {
+        setChainId(parseInt(chain, 16));
+      });
+    }
+  }, []);
 
   const mint = async () => {
     if (!address) return;
@@ -83,13 +98,22 @@ export default function RitualFudder() {
             </div>
           </div>
 
-          <button
-            onClick={connect}
-            className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
-          >
-            <Wallet size={17} />
-            {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
-          </button>
+          <div className="flex items-center gap-x-4">
+            {/* Network Status */}
+            {address && (
+              <div className={`px-4 h-9 rounded-xl border flex items-center text-xs font-medium ${isOnRitual ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-red-500/50 text-red-400'}`}>
+                {isOnRitual ? 'Ritual Network' : 'Wrong Network'}
+              </div>
+            )}
+
+            <button
+              onClick={connect}
+              className="flex items-center gap-x-2.5 px-7 h-11 rounded-2xl border border-white/15 hover:bg-white hover:text-[#0A0A09] active:scale-[0.985] transition-all text-sm font-medium"
+            >
+              <Wallet size={17} />
+              {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
+            </button>
+          </div>
         </div>
 
         {/* Tabs */}
