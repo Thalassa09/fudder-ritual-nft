@@ -103,6 +103,12 @@ export default function RitualFudder() {
               <Wallet size={18} />
               {address ? address.slice(0,6)+'...'+address.slice(-4) : 'Connect Wallet'}
             </button>
+
+            {/* Ritual Chain Status */}
+            <div className="flex items-center gap-x-2 px-4 h-9 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium tracking-[1px]">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              RITUAL CHAIN
+            </div>
           </div>
         </div>
 
