@@ -68,7 +68,7 @@ export default function RitualFudder() {
 
   return (
     <div className="min-h-screen bg-[#0A0A09] text-[#F5F0E6] font-sans tracking-[-0.2px]">
-      {/* Nav - Premium Style */}
+      {/* Nav */}
       <nav className="border-b border-white/10 bg-[#0A0A09]/95 backdrop-blur-3xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-x-3.5">
@@ -89,7 +89,7 @@ export default function RitualFudder() {
           </button>
         </div>
 
-        {/* Tabs - Subtle Style */}
+        {/* Tabs */}
         <div className="max-w-7xl mx-auto px-8 flex gap-x-1 text-sm border-t border-white/10">
           {(['explore','mint','owned'] as const).map((t) => (
             <button
@@ -98,9 +98,7 @@ export default function RitualFudder() {
               className={`px-5 py-[17px] capitalize tracking-[-0.3px] transition-all relative ${tab === t ? 'text-white font-medium' : 'text-white/45 hover:text-white/80'}`}
             >
               {t === 'owned' ? 'My Collection' : t}
-              {tab === t && (
-                <div className="absolute bottom-0 left-5 right-5 h-px bg-white" />
-              )}
+              {tab === t && <div className="absolute bottom-0 left-5 right-5 h-px bg-white" />}
             </button>
           ))}
         </div>
@@ -130,7 +128,21 @@ export default function RitualFudder() {
               </div>
               <div className="text-sm text-white/60 font-mono">0 / 100</div>
             </div>
-            <div className="text-center py-24 text-white/50 text-xl">No NFTs minted yet.</div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {phases.map((p, index) => (
+                <div key={index} className="bg-[#11110F] border border-white/10 rounded-3xl p-9">
+                  <div className="text-xs tracking-[4px] text-white/50 mb-2">PHASE {p.phase}</div>
+                  <div className="text-4xl tracking-[-1.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
+                  <div className="text-2xl text-[#C5A26F] font-medium mb-6">{p.name}</div>
+                  
+                  <div className="flex justify-between text-sm">
+                    <span className="text-white/60">Minted</span>
+                    <span className="font-mono">{p.minted} / 25</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
