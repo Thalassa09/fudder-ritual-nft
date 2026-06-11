@@ -14,10 +14,10 @@ const ABI = [
 ];
 
 const phases = [
-  { phase: 1, start: 1, end: 25, status: 'live' },
-  { phase: 2, start: 26, end: 50, status: 'upcoming' },
-  { phase: 3, start: 51, end: 75, status: 'upcoming' },
-  { phase: 4, start: 76, end: 100, status: 'upcoming' },
+  { phase: 1, start: 1, end: 25, minted: 6, status: 'live' },
+  { phase: 2, start: 26, end: 50, minted: 0, status: 'upcoming' },
+  { phase: 3, start: 51, end: 75, minted: 0, status: 'upcoming' },
+  { phase: 4, start: 76, end: 100, minted: 0, status: 'upcoming' },
 ];
 
 export default function RitualFudder() {
@@ -139,33 +139,56 @@ export default function RitualFudder() {
                 4 PHASES • 25 NFT EACH
               </div>
               <div className="text-6xl tracking-[-2.5px] font-semibold mb-4">Minting Phases</div>
-              <p className="text-white/60 text-lg">Free mint. Only gas. Collection will be revealed after 100 minted.</p>
+              <p className="text-white/60 text-lg">Each phase reveals only after 25 NFTs are minted.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-              {phases.map((p, index) => (
-                <div key={index} className={`bg-[#121210] border rounded-3xl p-8 ${p.status === 'live' ? 'border-[#C5A26F]' : 'border-white/10'}`}>
-                  <div className="flex justify-between items-center mb-6">
-                    <div>
-                      <div className="text-xs tracking-[3px] text-white/50">PHASE {p.phase}</div>
-                      <div className="text-3xl tracking-[-1px] mt-1">#{p.start} — #{p.end}</div>
+              {phases.map((p, index) => {
+                const isRevealed = p.minted === 25;
+                return (
+                  <div key={index} className={`bg-[#121210] border rounded-3xl p-8 ${p.status === 'live' ? 'border-[#C5A26F]' : 'border-white/10'}`}>
+                    <div className="flex justify-between items-center mb-6">
+                      <div>
+                        <div className="text-xs tracking-[3px] text-white/50">PHASE {p.phase}</div>
+                        <div className="text-3xl tracking-[-1px] mt-1">#{p.start} — #{p.end}</div>
+                      </div>
+                      <div className={`text-xs px-4 py-1.5 rounded-full border ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
+                        {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
+                      </div>
                     </div>
-                    <div className={`text-xs px-4 py-1.5 rounded-full border ${p.status === 'live' ? 'border-[#C5A26F] text-[#C5A26F]' : 'border-white/20 text-white/50'}`}>
-                      {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
+
+                    <div className="mb-6">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="text-white/60">Minted</span>
+                        <span>{p.minted} / 25</span>
+                      </div>
+                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-[#C5A26F] transition-all" 
+                          style={{ width: `${(p.minted / 25) * 100}%` }}
+                        />
+                      </div>
                     </div>
+
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-white/60">Reveal Status</span>
+                      <span className={isRevealed ? 'text-[#C5A26F]' : 'text-white/50'}>
+                        {isRevealed ? 'Revealed' : 'Not Revealed'}
+                      </span>
+                    </div>
+
+                    {p.status === 'live' && (
+                      <button 
+                        onClick={mint}
+                        disabled={!address}
+                        className="mt-6 w-full flex items-center justify-center gap-x-3 h-12 rounded-2xl bg-white text-[#0B0B0A] font-medium hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
+                      >
+                        <Zap size={17} /> Mint Phase {p.phase}
+                      </button>
+                    )}
                   </div>
-                  
-                  {p.status === 'live' && (
-                    <button 
-                      onClick={mint}
-                      disabled={!address}
-                      className="w-full flex items-center justify-center gap-x-3 h-12 rounded-2xl bg-white text-[#0B0B0A] font-medium hover:bg-[#C5A26F] active:scale-[0.985] disabled:opacity-40 transition-all"
-                    >
-                      <Zap size={17} /> Mint Phase {p.phase}
-                    </button>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {!address && <div className="text-center text-xs text-white/50">Connect wallet to mint</div>}
