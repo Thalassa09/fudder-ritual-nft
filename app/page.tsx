@@ -14,10 +14,38 @@ const ABI = [
 ];
 
 const phases = [
-  { phase: 1, start: 1, end: 25, minted: 0, status: 'live' },
-  { phase: 2, start: 26, end: 50, minted: 0, status: 'upcoming' },
-  { phase: 3, start: 51, end: 75, minted: 0, status: 'upcoming' },
-  { phase: 4, start: 76, end: 100, minted: 0, status: 'upcoming' },
+  { 
+    phase: 1, 
+    start: 1, 
+    end: 25, 
+    minted: 0, 
+    status: 'live',
+    name: "The First Rite"
+  },
+  { 
+    phase: 2, 
+    start: 26, 
+    end: 50, 
+    minted: 0, 
+    status: 'upcoming',
+    name: "The Forgotten Sigil"
+  },
+  { 
+    phase: 3, 
+    start: 51, 
+    end: 75, 
+    minted: 0, 
+    status: 'upcoming',
+    name: "The Eternal Flame"
+  },
+  { 
+    phase: 4, 
+    start: 76, 
+    end: 100, 
+    minted: 0, 
+    status: 'upcoming',
+    name: "The Final Offering"
+  },
 ];
 
 export default function RitualFudder() {
@@ -151,7 +179,8 @@ export default function RitualFudder() {
                           {p.status === 'live' ? 'LIVE' : 'UPCOMING'}
                         </div>
                       </div>
-                      <div className="text-6xl tracking-[-2.5px] font-semibold">#{p.start} — #{p.end}</div>
+                      <div className="text-6xl tracking-[-2.5px] font-semibold mb-1">#{p.start} — #{p.end}</div>
+                      <div className="text-2xl tracking-[-1px] text-[#C5A26F] font-medium">{p.name}</div>
                     </div>
 
                     <div className="flex-1 w-full md:w-auto">
